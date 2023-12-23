@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="closeSesion()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+<br>
+  <div style="text-align: left;margin-left: 20px;">
+    <ion-label class="titulo">INSPECTOR</ion-label>
+  </div>
+  <br>
+  <ion-list>
+    <ion-item>
+      <ion-input label="Name" id="name" ></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-input label="Last Name" id="last_name" ></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-input label="E-mail" id="email" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Number Phone" id="phone" ></ion-input>
+    </ion-item>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-textarea placeholder="Type address here" id="address"></ion-textarea>
+      </ion-card-content>
+    </ion-card>
+
+  </ion-list>
+
+
+  <div style="margin-top: 50px;margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
+    <ion-button fill="solid" expand="full" (click)="save()"><ion-icon name="checkmark-outline"></ion-icon>Save</ion-button>
+  </div>
+
+  <ion-grid>
+    <ion-row >
+      <ion-col>
+        <ion-card *ngFor="let dato of datos">
+          <div style="text-align: right;">
+            <ion-icon name="close" style="color: #b11c44;font-size: 18px;" (click)="showConfirmation(dato.id)"></ion-icon>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle><b>Address: </b> {{dato.address}}</ion-card-subtitle>
+            <ion-card-subtitle><b>Number phone: </b> {{dato.phone}}</ion-card-subtitle>
+            <ion-card-subtitle><b>E-mail: </b>{{dato.email}}</ion-card-subtitle>
+            <ion-card-title>{{dato.name}} {{dato.last_name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button fill="clear" expand="full"  (click)="back()"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</ion-footer>
+
+
+
+
+

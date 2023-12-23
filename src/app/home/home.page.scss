@@ -1,27 +1,52 @@
-#container {
-  text-align: center;
+/* styles.css */
+ion-content {
+  --background: transparent;
+}
 
+.login-container {
+  position: relative;
+  height: 100vh;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
   position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  z-index: -1;
+  opacity: 0.5; /* Ajusta la opacidad según tus preferencias */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.login-card {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8); /* Ajusta el color de fondo según tus preferencias */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.login-title {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333; /* Ajusta el color del título según tus preferencias */
 }
 
-#container a {
-  text-decoration: none;
+ion-button {
+  margin-top: 20px;
 }
+
+.container_logo{
+  width: 100%;
+  text-align: center;
+  padding-left: 35%;
+}
+.logo{
+  width: 100px;
+}
+
+.all_reserved{
+  color: #fff;
+}
+
+

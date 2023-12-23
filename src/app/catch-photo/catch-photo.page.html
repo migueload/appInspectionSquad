@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-img *ngIf="this.image" [src]="this.image"></ion-img>
+</ion-content>
+
+
+<ion-footer style="text-align: center;">
+ <ion-button fill="solid" expand="full" (click)="back()" style="background-color: #fff;color: #000;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</ion-footer>

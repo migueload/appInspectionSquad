@@ -1,0 +1,120 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="presentActionSheet()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<br>
+  <div style="text-align: left;margin-left: 20px;">
+    <ion-label class="titulo">ASSING</ion-label>
+  </div>
+  <br>
+  <ion-list>
+    <ion-item>
+      <ion-input type="date" id="date" label="Select Date"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-select label="Select type of inspection" id="type">
+        <ion-select-option  *ngFor="let item of types" value="{{item.code}}">
+          {{item.description}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+
+    <ion-item *ngIf="swAdmin">
+      <ion-select label="Select inspectors" id="inspector">
+        <ion-select-option  *ngFor="let inspector of inspectors" value="{{inspector.id}}">
+          {{inspector.name}} {{inspector.last_name}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <br>
+
+    <ion-item>
+      <ion-label>
+        Select the language of the inspection report
+      </ion-label>
+      <ion-segment value="spa" id="idiom">
+        <ion-segment-button value="spa">
+          <ion-label>Spanish</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="eng">
+          <ion-label>English</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-input label="Establishment Name" id="name" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <input type="text" id="address" #addressSelect placeholder="Establishment Address" disabled style="background-color: #fff;color: #6E6E6E;width: 100%;height: 35px;">
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-searchbar
+      searchIcon="search-circle"
+      animated="true"
+      showClearButton="focus"
+      clearIcon="trash-bin"
+      debounce="800"
+      placeholder="Search for area, street..."
+      (ionInput)="onSearchChange($event)">
+    </ion-searchbar>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="places?.length > 0">
+    <ion-item *ngFor="let place of places" (click)="setAddress(place)">
+      <ion-icon name="location-outline" slot="start"></ion-icon>
+      <ion-label>
+        {{place?.title}}
+        <p>
+          <ion-text>
+            {{place?.address}}
+          </ion-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div style="margin-top: 50px;margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
+    <ion-button fill="solid" expand="full" (click)="save()" style="background-color: #1c345c;color: #fff;"><ion-icon name="checkmark-outline"></ion-icon>Save</ion-button>
+  </div>
+
+  <ion-grid>
+    <ion-row *ngFor="let dato of datos;">
+      <ion-col>
+        <ion-card >
+          <div style="text-align: right;">
+            <ion-icon name="close" style="color: #b11c44;font-size: 18px;" (click)="showConfirmation(dato.id)"></ion-icon>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle><b>Date:</b> {{dato.date}}</ion-card-subtitle>
+            <ion-card-subtitle>{{dato.id_inspection}} - {{dato.description_inspection}}</ion-card-subtitle>
+            <ion-card-title>{{dato.name_emp}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+           {{dato.address_emp}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button fill="solid" expand="full" (click)="back()" style="background-color: #1c345c;color: #fff;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</ion-footer>
+
+
+
+
+

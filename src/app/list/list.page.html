@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="presentActionSheet()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+<br>
+  <div style="text-align: left;margin-left: 20px;">
+    <ion-label class="titulo">LIST INSPECTIONS</ion-label>
+  </div>
+<br>
+  <ion-segment value="buttons">
+    <ion-segment-button value="pending" (click)="load(0)">
+      <ion-label>Pending</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="completed" (click)="load(1)">
+      <ion-label>Completed</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="canceled" (click)="load(2)">
+      <ion-label>Canceled</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <ion-grid>
+    <ion-row *ngFor="let dato of datos;">
+      <ion-col>
+        <ion-card [routerLink]="['/details',dato.id]">
+          <ion-card-header>
+            <ion-label><b>Inspected by:</b> {{dato.nombre_inspector}} </ion-label>
+            <ion-label><b>Date:</b> {{dato.date}}</ion-label>
+            <ion-label><b>Type:</b> {{dato.id_inspection}}</ion-label><br>
+            <ion-card-title>{{dato.name_emp}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div style="text-align: right;">
+              <ion-label>
+                <b> <ion-icon name="bookmark"></ion-icon>STATUS: </b>
+                <span class="status">{{status}}</span>
+              </ion-label>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="vacio">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-label style="font-size: 20px;" >No results found</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
+
+<footer>
+  <ion-button fill="solid" expand="full" routerLink="../dashboard" style="background-color: #1c345c;color: #fff;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</footer>
+

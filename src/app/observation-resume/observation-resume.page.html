@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="presentActionSheet()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+<ion-card>
+  <ion-card-content>
+    <ion-label><b>Establishment Name:</b> {{name_emp}}</ion-label><br>
+    <ion-label><b>Date:</b> {{date}}</ion-label><br>
+    <ion-label><b>Establishment Address:</b> {{address_emp}}</ion-label><br>
+  </ion-card-content>
+</ion-card>
+
+<br>
+
+<ion-item>
+  <ion-label class="titulo">SUMMARY OF INSPECTION OBSERVATIONS </ion-label>
+</ion-item>
+
+<ion-card>
+  <ion-card-content>
+    <ion-label><b>Section Observation</b> {{observation_section}}</ion-label><br><br>
+    <ion-label><b><ion-icon name="checkmark-outline"></ion-icon> Observation</b> {{observation}}</ion-label><br>
+    <ion-label *ngIf="observation_child"><b><ion-icon name="checkmark-outline"></ion-icon> Sub Observation</b> {{observation_child}} </ion-label><br><br>
+
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <ion-label> <ion-icon name="chatbubble-ellipses-outline"></ion-icon> Comments</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          {{comments}}
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-card-content>
+</ion-card>
+
+  <div style="margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
+    <ion-button color="medium" expand="full" routerLink="../catch-photo"><ion-icon name="camera-outline"></ion-icon></ion-button>
+  </div>
+  <div style="margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
+    <ion-button fill="solid" expand="full"  [routerLink]="['/observation-section',type_inspection]"><ion-icon name="add-outline"></ion-icon>Add</ion-button>
+  </div>
+
+  <div style="margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
+    <ion-button fill="solid" expand="full" (click)="generateReport()"><ion-icon name="document-outline"></ion-icon>Send Report</ion-button>
+  </div>
+
+
+</ion-content>
+
+<footer>
+  <ion-button fill="solid" expand="full" routerLink="../dashboard" style="background-color: #1c345c;color: #fff;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</footer>
+

@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="presentActionSheet()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+<br>
+  <div style="text-align: left;margin-left: 20px;">
+    <ion-label class="titulo">DASHBOARD</ion-label>
+  </div>
+
+  <ion-grid>
+    <ion-row *ngFor="let dato of datos;">
+      <ion-col>
+        <ion-card  (click)="setCode(dato)" [routerLink]="['/observation-section',dato.id_inspection]">
+          <ion-card-header>
+            <ion-card-subtitle><b>Date:</b> {{dato.date}}</ion-card-subtitle>
+            <ion-card-subtitle>{{dato.id_inspection}} - {{dato.description_inspection}}</ion-card-subtitle>
+            <ion-card-title>{{dato.name_emp}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+           {{dato.address_emp}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="vacio">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-content>
+            <ion-label style="font-size: 20px;"> Has no pending inspections<ion-icon name="alert"></ion-icon></ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" style="background-color: #1c345c;">
+        <ion-tab-button tab="" routerLink="../assing" style="font-size:14px;background-color: #1c345c;color: #fff">
+          <ion-icon name="person-add-outline"></ion-icon>
+          <ion-label>ASSING</ion-label>
+        </ion-tab-button>
+
+
+        <ion-tab-button tab="" routerLink="../list" style="font-size:14px;background-color: #1c345c;color: #fff;">
+          <ion-icon aria-hidden="true" name="list"></ion-icon>
+          <ion-label>LIST</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="" routerLink="../inspector" style="font-size:14px;background-color: #1c345c;color: #fff;" *ngIf="swAdmin">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <ion-label>INSPECTORS</ion-label>
+        </ion-tab-button>
+
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+

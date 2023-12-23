@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="presentActionSheet()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-label><b>Establishment Address:</b> {{address_emp}}</ion-label>
+      <ion-label><b>Establishment Name:</b> {{name_emp}}</ion-label>
+      <ion-label><b>Date:</b> {{date}}</ion-label>
+    </ion-card-header>
+  </ion-card>
+ <br>
+  <div style="text-align: left;margin-left: 20px;margin-bottom: 20px;">
+    <ion-label class="titulo">OBSERVATION</ion-label>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of observations; let index" (click)="setCode(item)" [routerLink]="['/observation-child',item.code]">
+      <ion-label>{{ item.description }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+<footer>
+  <ion-button fill="solid" expand="full" routerLink="../../dashboard" style="background-color: #1c345c;color: #fff;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</footer>
+
+
+
