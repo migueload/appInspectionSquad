@@ -1,0 +1,7 @@
+{
+  "name": "appInspectionSquad",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
