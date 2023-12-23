@@ -1,6 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-catch-photo',
@@ -22,14 +22,15 @@ export class CatchPhotoPage implements OnInit{
   public async takePhoto(){
       const image = await Camera.getPhoto({
         quality: 50,
-        allowEditing: true,
-        resultType: CameraResultType.Uri
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
       });
       this.image=image.webPath;
   }
 
 
     back(){
+      localStorage.setItem('imagen', this.image);
       this.navCtrl.navigateForward('observation-resume');
     }
 

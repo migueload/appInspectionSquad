@@ -18,6 +18,10 @@ export class ObservationResumePage {
   observation_child=localStorage.getItem("observation_child");
   comments=localStorage.getItem("comments");
   type_inspection=localStorage.getItem('type_inspection');
+  image=localStorage.getItem("imagen");
+
+  isAlertOpen = false;
+  alertButtons = ['Action'];
 
   constructor(
     public navCtrl: NavController,
@@ -56,11 +60,11 @@ export class ObservationResumePage {
     await actionSheet.present();
   }
 
-  generateReport(){
+  generateReport(isOpen: boolean){
     const id=localStorage.getItem("id_assigment");
     this.service.generateReport(id).subscribe(
       (respuesta) => {
-        this.success();
+        this.isAlertOpen = isOpen;
       },
       (error) => {
         console.log("Error"+ error);
@@ -69,13 +73,5 @@ export class ObservationResumePage {
 
   }
 
-  async success() {
-    const toast = await this.toast.create({
-      message: 'The report has been sent successfully.',
-      duration: 3000,
-      position: 'middle'
-    });
-    toast.present();
-  }
 
 }
