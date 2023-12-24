@@ -26,14 +26,16 @@
       <ion-label>Canceled</ion-label>
     </ion-segment-button>
   </ion-segment>
-
-
+  <br>
+  <ion-item style="width: 300px;">
+    <ion-input type="date" id="date" label="Select Date" (ionChange)="onDateChange($event)"></ion-input>
+  </ion-item>
   <ion-grid>
     <ion-row *ngFor="let dato of datos;">
       <ion-col>
         <ion-card [routerLink]="['/details',dato.id]">
           <ion-card-header>
-            <ion-label><b>Inspected by:</b> {{dato.nombre_inspector}} </ion-label>
+            <ion-label *ngIf="dato.nombre_inspector"><b>Inspected by:</b> {{dato.nombre_inspector}} </ion-label>
             <ion-label><b>Date:</b> {{dato.date}}</ion-label>
             <ion-label><b>Type:</b> {{dato.id_inspection}}</ion-label><br>
             <ion-card-title>{{dato.name_emp}}</ion-card-title>

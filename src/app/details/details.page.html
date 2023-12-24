@@ -27,18 +27,18 @@
   <ion-card>
     <ion-card-content *ngFor="let dato of datos;">
       <ion-item>
-        <ion-label><b>Section Observation</b> {{dato.observation_section}}</ion-label>
+        <ion-label><b>Section Observation </b> {{dato.seccion_observation}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label><b><ion-icon name="checkmark-outline"></ion-icon> Observation</b>{{dato.observation}}</ion-label>
+        <ion-label><b><ion-icon name="checkmark-outline"></ion-icon> Observation </b>{{dato.description_observation}}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label><b><ion-icon name="checkmark-outline"></ion-icon> Sub Observation</b>{{dato.observation_child_name}}</ion-label>
+        <ion-label><b><ion-icon name="checkmark-outline"></ion-icon> Sub Observation </b>{{dato.observation_child_name}}</ion-label>
       </ion-item>
         <ion-accordion-group>
           <ion-accordion value="first">
             <ion-item slot="header" color="light">
-              <ion-label> <ion-icon name="chatbubble-ellipses-outline"></ion-icon> Comments</ion-label>
+              <ion-label> <ion-icon name="chatbubble-ellipses-outline"></ion-icon> Comments </ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
             {{dato.comments}}
@@ -50,13 +50,14 @@
           <ion-card-content>
             <ion-grid>
               <ion-row>
-                <ion-col>
-                  Photos
-                </ion-col>
+                  <ion-col>
+                    <ion-img src="data:image/png;base64,{{dato.url_image}}" *ngIf="dato.url_image" [routerLink]="['/detail-photo',dato.url_image]"></ion-img>
+                  </ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-content>
         </ion-card>
+
 
     </ion-card-content>
   </ion-card>

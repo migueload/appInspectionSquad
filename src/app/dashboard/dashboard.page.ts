@@ -24,7 +24,6 @@ export class DashboardPage implements OnInit{
   }
 
  async  ngOnInit(){
-   this.refreshPage();
     this.user=localStorage.getItem("username");
     this.nivel=localStorage.getItem("nivel");
     this.nivel=="1"?this.swAdmin=true:this.swAdmin=false;
@@ -38,7 +37,7 @@ export class DashboardPage implements OnInit{
   }
 
 
- async loadAssigmentAll(){
+  loadAssigmentAll(){
     this.service.getAsignmentAll().subscribe(
       (data)=>{
         this.datos= data;
@@ -50,7 +49,7 @@ export class DashboardPage implements OnInit{
     )
   }
 
-  async loadAssigment(){
+  loadAssigment(){
     const id_inspector=localStorage.getItem('id_inspector');
     const datos={
       "id": id_inspector
@@ -83,14 +82,6 @@ export class DashboardPage implements OnInit{
     this.navCtrl.navigateForward('');
   }
 
-
-  refreshPage() {
-    this.ionViewWillEnter();
-  }
-
-  ionViewWillEnter(){
-    console.log("refresh");
-  }
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({

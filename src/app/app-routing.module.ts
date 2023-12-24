@@ -44,10 +44,6 @@ const routes: Routes = [
     loadChildren: () => import('./inspector/inspector.module').then( m => m.InspectorPageModule)
   },
   {
-    path: 'catch-photo',
-    loadChildren: () => import('./catch-photo/catch-photo.module').then( m => m.CatchPhotoPageModule)
-  },
-  {
     path: 'observation-resume',
     loadChildren: () => import('./observation-resume/observation-resume.module').then( m => m.ObservationResumePageModule)
   },

@@ -14,10 +14,12 @@ export class DetailsPage  implements OnInit{
   user=localStorage.getItem("username");
   id_assing_inspection: any;
   id:any;
+  id_observation:any;
   inspect_by:any;
   type:any;
   description_inspection:any;
   swPending:any;
+  photos:any;
 
   constructor(
     private navCtrl: NavController,
@@ -60,6 +62,7 @@ export class DetailsPage  implements OnInit{
         this.description_inspection=respuesta[0].description_inspection;
         this.inspect_by=respuesta[0].nombre_inspector;
         this.datos=respuesta;
+        console.log(this.datos);
         respuesta[0].status=="0"?this.swPending=true:this.swPending=false;
       },
       (error) => {

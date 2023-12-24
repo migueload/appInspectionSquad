@@ -26,6 +26,7 @@ export class ObservationPage implements OnInit {
 
   ngOnInit() {
     this.id_observation=this.activatedRoute.snapshot.paramMap.get('id');
+    localStorage.setItem("id_observation","");
     this.loadObservation(this.id_observation);
   }
 

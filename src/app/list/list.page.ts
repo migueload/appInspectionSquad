@@ -16,6 +16,9 @@ export class ListPage implements OnInit {
   status: any;
   vacio: boolean=false;
   id_assing_inspection: any;
+  selectedDate: string;
+  filteredDatos: any[];
+
 
   constructor(
     private navCtrl: NavController,
@@ -25,6 +28,7 @@ export class ListPage implements OnInit {
 
   ngOnInit() {
     this.load(0);
+    this.filterByDate();
   }
 
   load(status: any){
@@ -84,6 +88,22 @@ export class ListPage implements OnInit {
     );
   }
 
+
+  filterByDate() {
+    if (this.selectedDate) {
+      const selectedDateFormatted = new Date(this.selectedDate).toLocaleDateString;
+      this.filteredDatos = this.datos.filter((dato) => dato.date === selectedDateFormatted);
+      this.vacio = this.filteredDatos.length === 0;
+    } else {
+      this.filteredDatos = this.datos;
+      this.vacio = false;
+    }
+  }
+
+  onDateChange(event: any) {
+    this.selectedDate = event.detail.value;
+    this.filterByDate();
+  }
 
 
   closeSesion(){

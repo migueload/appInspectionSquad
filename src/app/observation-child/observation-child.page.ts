@@ -92,7 +92,7 @@ export class ObservationChildPage implements OnInit {
        "observation_section": datosObservationes[1],
        "observation": datosObservationes[2],
        "observation_child": datosObservationes[3],
-       "comments":this.comments
+       "comments":localStorage.getItem('comments')
      };
     this.service.saveInspectionDetails(datosInspectionDetails).subscribe(
       (respuesta) => {
