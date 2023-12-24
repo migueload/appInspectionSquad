@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-img src="../../assets/img/logo_circle.png" alt="Logo Inspection squad" style="width: 50px;"></ion-img>
+    <div class="user" style="text-align: right;" (click)="presentActionSheet()">
+      <ion-label style="color: #6E6E6E;">{{user}}  <ion-icon name="person"></ion-icon> </ion-label>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-col> <ion-img *ngIf="this.photo" [src]="this.photo"></ion-img></ion-col>
+  </ion-grid>
+</ion-content>
+
+
+<ion-footer style="text-align: center;">
+ <ion-button fill="default" expand="full" (click)="back()" style="background-color: #fff;color: #000;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+</ion-footer>

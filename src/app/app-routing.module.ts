@@ -51,6 +51,10 @@ const routes: Routes = [
     path: 'observation-resume',
     loadChildren: () => import('./observation-resume/observation-resume.module').then( m => m.ObservationResumePageModule)
   },
+  {
+    path: 'detail-photo/:photo',
+    loadChildren: () => import('./detail-photo/detail-photo.module').then( m => m.DetailPhotoPageModule)
+  },
 ];
 
 @NgModule({

@@ -38,7 +38,7 @@ export class DashboardPage implements OnInit{
   }
 
 
-  loadAssigmentAll(){
+ async loadAssigmentAll(){
     this.service.getAsignmentAll().subscribe(
       (data)=>{
         this.datos= data;
@@ -50,7 +50,7 @@ export class DashboardPage implements OnInit{
     )
   }
 
-  loadAssigment(){
+  async loadAssigment(){
     const id_inspector=localStorage.getItem('id_inspector');
     const datos={
       "id": id_inspector

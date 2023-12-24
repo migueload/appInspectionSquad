@@ -7,7 +7,7 @@ import { ServiceService } from '../services/service.service';
   templateUrl: './observation-resume.page.html',
   styleUrls: ['./observation-resume.page.scss'],
 })
-export class ObservationResumePage implements OnInit{
+export class ObservationResumePage implements OnInit {
 
   user=localStorage.getItem("username");
   name_emp=localStorage.getItem("name_emp");
@@ -27,29 +27,17 @@ export class ObservationResumePage implements OnInit{
     public navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
     private alert: AlertController,
-    private service: ServiceService) {
-    }
+    private service: ServiceService
+  ) {}
 
-
-  ngOnInit(){
-    this.refreshPage();
+  ngOnInit() {
     this.getPhotos();
   }
 
-  refreshPage() {
-    this.ionViewWillEnter();
-  }
-
-  ionViewWillEnter(){
-    console.log("refresh");
-  }
-
-  closeSesion(){
+  closeSession() {
     localStorage.clear();
     this.navCtrl.navigateForward('');
   }
-
-
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
@@ -58,9 +46,7 @@ export class ObservationResumePage implements OnInit{
         {
           text: 'Are you sure you log out?',
           role: 'exit',
-          handler: () => {
-            this.closeSesion()
-          },
+          handler: () => this.closeSession(),
         },
         {
           text: 'Cancel',
@@ -77,21 +63,17 @@ export class ObservationResumePage implements OnInit{
   async showConfirmation(id: any) {
     const alert = await this.alert.create({
       header: 'Confirmation',
-      message: '¿Are you sure?',
+      message: 'Are you sure?',
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {
-            console.log('Acción cancelada');
-          },
+          handler: () => console.log('Action canceled'),
         },
         {
           text: 'Ok',
-          handler: () => {
-            this.delPhoto(id);
-          },
+          handler: () => this.delPhoto(id),
         },
       ],
     });
@@ -99,55 +81,40 @@ export class ObservationResumePage implements OnInit{
     await alert.present();
   }
 
-
-  getPhotos(){
-    const id_observation=localStorage.getItem("id_observation");
-    const dato={
-      "id_observation":id_observation
+  async getPhotos() {
+    try {
+      const id_observation = localStorage.getItem("id_observation");
+      const response = await this.service.getPhotos({ "id_observation": id_observation }).toPromise();
+      this.photos = response;
+    } catch (error) {
+      console.log("Error fetching photos:", error);
     }
-    this.service.getPhotos(dato).subscribe(
-      (respuesta) => {
-        this.photos=respuesta;
-        this.refreshPage();
-
-      },
-      (error) => {
-        console.log("Error"+ error);
-      }
-    );
-
   }
 
-  delPhoto(id){
-    const datosPhoto={
-      'id':id
+  async delPhoto(id) {
+    try {
+      const response = await this.service.delPhoto({ 'id': id }).toPromise();
+      this.getPhotos();
+    } catch (error) {
+      console.log("Error deleting photo:", error);
     }
-    this.service.delPhoto(datosPhoto).subscribe(
-      (respuesta) => {
-        this.getPhotos();
-      },
-      (error) => {
-        console.log("Error"+ error);
-      }
-    );
-}
-
-
-  generateReport(isOpen: boolean){
-    const id=localStorage.getItem("id_assigment");
-    this.service.generateReport(id).subscribe(
-      (respuesta) => {
-        this.isAlertOpen = isOpen;
-      },
-      (error) => {
-        console.log("Error"+ error);
-      }
-    );
-
   }
 
-  cathPhoto(){
+  async generateReport(isOpen: boolean) {
+    try {
+      const id = localStorage.getItem("id_assigment");
+      const response = await this.service.generateReport(id).toPromise();
+      this.isAlertOpen = isOpen;
+    } catch (error) {
+      console.log("Error generating report:", error);
+    }
+  }
+
+  catchPhoto() {
     this.navCtrl.navigateForward('catch-photo');
   }
 
+
 }
+
+
