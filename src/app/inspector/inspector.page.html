@@ -41,7 +41,7 @@
 
 
   <div style="margin-top: 50px;margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
-    <ion-button fill="solid" expand="full" (click)="save()"><ion-icon name="checkmark-outline"></ion-icon>Save</ion-button>
+    <ion-button fill="clear" expand="full" (click)="save()" style="background-color: #1c345c;color: #fff;"><ion-icon name="checkmark-outline"></ion-icon>Save</ion-button>
   </div>
 
   <ion-grid>
@@ -49,7 +49,7 @@
       <ion-col>
         <ion-card *ngFor="let dato of datos">
           <div style="text-align: right;">
-            <ion-icon name="close" style="color: #b11c44;font-size: 18px;" (click)="showConfirmation(dato.id)"></ion-icon>
+            <ion-icon name="close-circle-outline" style="color: #b11c44;font-size: 18px;" (click)="showConfirmation(dato.id)"></ion-icon>
           </div>
           <ion-card-header>
             <ion-card-subtitle><b>Address: </b> {{dato.address}}</ion-card-subtitle>

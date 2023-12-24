@@ -44,7 +44,6 @@ export class ObservationChildPage implements OnInit {
         console.log("Error"+ error);
       }
     );
-
   }
 
   setCode(item: any){
@@ -97,13 +96,14 @@ export class ObservationChildPage implements OnInit {
      };
     this.service.saveInspectionDetails(datosInspectionDetails).subscribe(
       (respuesta) => {
+        localStorage.setItem("id_observation",respuesta);
         console.log("exito");
-        this.clearObservations();
       },
       (error) => {
         console.log("Error"+ error);
       }
     );
+    this.clearObservations();
   }
 
 

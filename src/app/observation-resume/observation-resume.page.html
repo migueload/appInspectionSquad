@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
 <ion-card>
   <ion-card-content>
@@ -45,17 +45,31 @@
 <ion-card>
   <ion-card-content>
     <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-img *ngIf="this.image" [src]="this.image"></ion-img>
-        </ion-col>
+      <ion-row *ngFor="let photo of photos; let i = index">
+        <ng-container *ngIf="i % 2 === 0">
+          <ion-col size="6">
+            <div style="text-align: left;">
+              <ion-icon name="close-circle-outline" style="color: #b11c44;font-size: 22px;" (click)="showConfirmation(photo.id)"></ion-icon>
+            </div>
+            <ion-img src="data:image/png;base64,{{photo.url_image}}" *ngIf="photo.url_image"></ion-img>
+          </ion-col>
+        </ng-container>
+
+        <ng-container *ngIf="i % 2 !== 0">
+          <ion-col size="6">
+            <div style="text-align: left;">
+              <ion-icon name="close-circle-outline" style="color: #b11c44;font-size: 22px;" (click)="showConfirmation(photo.id)"></ion-icon>
+            </div>
+            <ion-img src="data:image/png;base64,{{photo.url_image}}" *ngIf="photo.url_image"></ion-img>
+          </ion-col>
+        </ng-container>
       </ion-row>
     </ion-grid>
   </ion-card-content>
 </ion-card>
 
   <div style="margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
-    <ion-button color="medium" expand="full" routerLink="../catch-photo"><ion-icon name="camera-outline"></ion-icon></ion-button>
+    <ion-button color="medium" expand="full" (click)="cathPhoto()"><ion-icon name="camera-outline"></ion-icon></ion-button>
   </div>
   <div style="margin-left: 20px;padding-right: 20px;margin-bottom: 20px;">
     <ion-button fill="clear" expand="full"  [routerLink]="['/observation-section',type_inspection]" style="background-color: #1c345c;color: #fff;"><ion-icon name="add-outline"></ion-icon>Add</ion-button>
@@ -72,11 +86,9 @@
     (didDismiss)="generateReport(false)"
   ></ion-alert>
   </div>
-
-
 </ion-content>
 
 <footer>
-  <ion-button fill="default" expand="full" routerLink="../dashboard" style="background-color: #fff;color: #000;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
+  <ion-button fill="clear" expand="full" routerLink="../dashboard" style="background-color: #fff;color: #000;"><ion-icon name="chevron-back-outline"></ion-icon>Back</ion-button>
 </footer>
 

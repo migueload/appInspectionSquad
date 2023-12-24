@@ -182,6 +182,35 @@ export class ServiceService {
     return this.http.post<any>(this.urlApi+"Inspections/setUpdateStatus", datos, httpOptions);
   }
 
+  saveImage(datos: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>(this.urlApi+"Inspections/saveImage", datos, httpOptions);
+  }
+
+  getPhotos(datos: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>(this.urlApi+"Inspections/getPhotos", datos, httpOptions);
+  }
+
+  delPhoto(datos: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<any>(this.urlApi+"Inspections/delImage", datos, httpOptions);
+  }
+
+
+
 
   //**Generate Report */
   generateReport(id: any): Observable<any> {
