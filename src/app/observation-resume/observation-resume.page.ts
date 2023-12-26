@@ -151,7 +151,7 @@ export class ObservationResumePage implements OnInit{
 
   public async takePhoto(){
     const image = await Camera.getPhoto({
-      quality: 50,
+      quality: 70,
       allowEditing: false,
       resultType: CameraResultType.Base64,
     });
