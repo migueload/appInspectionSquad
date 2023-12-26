@@ -22,9 +22,9 @@ export class ObservationResumePage implements OnInit{
   comments=localStorage.getItem("comments");
   type_inspection=localStorage.getItem('type_inspection');
   photos:any;
-
   isAlertOpen = false;
   alertButtons = ['Action'];
+  isRefrescar=false;
 
   constructor(
     public navCtrl: NavController,
@@ -37,6 +37,7 @@ export class ObservationResumePage implements OnInit{
 
   ngOnInit(){
     this.getPhotos();
+    this.refreshPage();
   }
 
   closeSesion(){
@@ -44,6 +45,17 @@ export class ObservationResumePage implements OnInit{
     this.navCtrl.navigateForward('');
   }
 
+
+  refreshPage() {
+    this.ionViewWillEnter();
+  }
+
+  ionViewWillEnter(){
+    if(this.isRefrescar){
+      document.location.reload();
+      this.isRefrescar=false;
+    }
+  }
 
 
   async presentActionSheet() {
@@ -159,6 +171,9 @@ export class ObservationResumePage implements OnInit{
     this.service.saveImage(datosInspectionImage).subscribe(
       (respuesta) => {
         this.success();
+        this.getPhotos();
+        this.isRefrescar=true;
+        this.ngOnInit();
       },
       (error) => {
         console.log("Error"+ error);

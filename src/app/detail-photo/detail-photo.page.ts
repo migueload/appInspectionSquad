@@ -11,6 +11,7 @@ import { NavController, ActionSheetController } from '@ionic/angular';
 export class DetailPhotoPage implements OnInit {
 
   photo: any;
+  option:any;
   user=localStorage.getItem("username");
 
   constructor(

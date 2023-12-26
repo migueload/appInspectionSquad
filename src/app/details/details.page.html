@@ -46,18 +46,20 @@
           </ion-accordion>
         </ion-accordion-group>
 
-        <ion-card>
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                  <ion-col>
-                    <ion-img src="data:image/png;base64,{{dato.url_image}}" *ngIf="dato.url_image" [routerLink]="['/detail-photo',dato.url_image]"></ion-img>
-                  </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-content>
-        </ion-card>
-
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light" (click)="showPhotos(dato.id)">
+              <ion-label> <ion-icon name="image"></ion-icon> Show Photos </ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-grid *ngFor="let photo of photos">
+                <ion-col>
+                  <ion-img src="data:image/png;base64,{{photo.url_image}}"></ion-img>
+                </ion-col>
+              </ion-grid>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
 
     </ion-card-content>
   </ion-card>

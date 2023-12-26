@@ -56,7 +56,7 @@ export class ObservationChildPage implements OnInit {
 
 
   saveInspection(){
-      if(this.id_inspection!=null){
+      if(this.id_inspection!=""){
         const datosObservationes: string[]=localStorage.getItem("codes").split(',');
         this.saveInspectionDetails(this.id_inspection);
       }else{

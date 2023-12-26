@@ -62,7 +62,6 @@ export class DetailsPage  implements OnInit{
         this.description_inspection=respuesta[0].description_inspection;
         this.inspect_by=respuesta[0].nombre_inspector;
         this.datos=respuesta;
-        console.log(this.datos);
         respuesta[0].status=="0"?this.swPending=true:this.swPending=false;
       },
       (error) => {
@@ -120,6 +119,23 @@ export class DetailsPage  implements OnInit{
       ],
     });
     await alert.present();
+  }
+
+
+  showPhotos(id: any){
+    const datos={
+      "id_observation": id
+    }
+    this.service.getPhotos(datos).subscribe(
+      (respuesta) => {
+        this.photos=respuesta;
+        console.log(this.photos);
+      },
+      (error) => {
+        console.log("Error"+ error);
+      }
+    );
+
   }
 
   updateInspection(id:any, status:any){
