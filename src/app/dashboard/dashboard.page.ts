@@ -15,6 +15,7 @@ export class DashboardPage implements OnInit{
   user:any;
   vacio: boolean=false;
   swAdmin:boolean=false;
+  isRefrescar=false;
 
 
   constructor(
@@ -31,8 +32,10 @@ export class DashboardPage implements OnInit{
     this.nivel=="1"?this.swAdmin=true:this.swAdmin=false;
     if(this.nivel=="1"){
       this.loadAssigmentAll();
+      this.refreshPage();
     }else{
       this.loadAssigment();
+      this.refreshPage();
     }
     let hasPermissionCamera=await Camera.checkPermissions();
     console.log(hasPermissionCamera);
@@ -44,6 +47,7 @@ export class DashboardPage implements OnInit{
       (data)=>{
         this.datos= data;
         data[0]==undefined?this.vacio=true:this.vacio=false;
+        this.isRefrescar=true;
       },
       (error)=>{
         console.error("Error al obtener los datos", error);
@@ -61,11 +65,24 @@ export class DashboardPage implements OnInit{
       (data)=>{
         this.datos= data;
         data[0]==undefined?this.vacio=true:this.vacio=false;
+        this.isRefrescar=true;
       },
       (error)=>{
         console.error("Error al obtener los datos", error);
       }
     )
+  }
+
+
+  refreshPage() {
+    this.ionViewWillEnter();
+  }
+
+  ionViewWillEnter(){
+    if(this.isRefrescar){
+      document.location.reload();
+      this.isRefrescar=false;
+    }
   }
 
   setCode(item: any){

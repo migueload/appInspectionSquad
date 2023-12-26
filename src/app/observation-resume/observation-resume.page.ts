@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ActionSheetController, ToastController } from '@ionic/angular';
 import { ServiceService } from '../services/service.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-observation-resume',
