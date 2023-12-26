@@ -24,6 +24,7 @@ export class DashboardPage implements OnInit{
   }
 
  async  ngOnInit(){
+    document.body.classList.remove('dark');
     localStorage.setItem("id_inspection","")
     this.user=localStorage.getItem("username");
     this.nivel=localStorage.getItem("nivel");
