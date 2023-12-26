@@ -211,7 +211,6 @@ export class ServiceService {
 
 
 
-
   //**Generate Report */
   generateReport(id: any): Observable<any> {
     return this.http.get<any>(this.urlApiReport+"?id="+id);

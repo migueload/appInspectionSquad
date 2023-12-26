@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ActionSheetController, ToastController } from '@ionic/angular';
 import { ServiceService } from '../services/service.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-observation-resume',
@@ -31,7 +32,8 @@ export class ObservationResumePage implements OnInit{
     private actionSheetCtrl: ActionSheetController,
     private alert: AlertController,
     private service: ServiceService,
-    private toast: ToastController) {
+    private toast: ToastController
+    ) {
     }
 
 
@@ -149,6 +151,9 @@ export class ObservationResumePage implements OnInit{
 
   }
 
+
+
+
   public async takePhoto(){
     const image = await Camera.getPhoto({
       quality: 70,
@@ -158,7 +163,6 @@ export class ObservationResumePage implements OnInit{
     this.saveImage(image.base64String);
     this.ngOnInit();
   }
-
 
   saveImage(image: any){
      const id_inspection=localStorage.getItem("id_inspection");
@@ -190,5 +194,7 @@ export class ObservationResumePage implements OnInit{
     toast.present();
   }
 }
+
+
 
 
