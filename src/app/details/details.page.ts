@@ -19,7 +19,11 @@ export class DetailsPage  implements OnInit{
   type:any;
   description_inspection:any;
   swPending:any;
+  swCompleted:any;
+  name_emp:any;
   photos:any;
+  isAlertOpen = false;
+  alertButtons = ['Action'];
 
   constructor(
     private navCtrl: NavController,
@@ -59,16 +63,37 @@ export class DetailsPage  implements OnInit{
     }
     this.service.getDetailsInspection(datos).subscribe(
       (respuesta) => {
+        console.log(respuesta);
         this.type=respuesta[0].type_inspection;
         this.description_inspection=respuesta[0].description_inspection;
         this.inspect_by=respuesta[0].nombre_inspector;
         this.datos=respuesta;
+        this.name_emp=localStorage.getItem('name_emp');
+        console.log(this.datos);
         respuesta[0].status=="0"?this.swPending=true:this.swPending=false;
+        respuesta[0].status=="1"?this.swCompleted=true:this.swCompleted=false;
       },
       (error) => {
         console.log("Error"+ error);
       }
     );
+  }
+
+  sendReport(isOpen: boolean){
+    const id=localStorage.getItem("id_assigment");
+    this.service.generateReport(id).subscribe(
+      (respuesta) => {
+        this.isAlertOpen = isOpen;
+      },
+      (error) => {
+        console.log("Error"+ error);
+      }
+    );
+
+  }
+
+  addObservation(){
+
   }
 
   async showConfirmationPending() {

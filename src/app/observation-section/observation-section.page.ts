@@ -12,10 +12,10 @@ export class ObservationSectionPage implements OnInit{
 
   id_observation: any;
   observations:any;
-  user=localStorage.getItem("username");
-  name_emp=localStorage.getItem("name_emp");
-  date=localStorage.getItem("date");
-  address_emp=localStorage.getItem("address_emp");
+  user:any;
+  name_emp:any;
+  date:any;
+  address_emp:any;
 
 
   constructor(
@@ -26,6 +26,10 @@ export class ObservationSectionPage implements OnInit{
    }
   ngOnInit(){
     this.id_observation=this.activatedRoute.snapshot.paramMap.get('id');
+    this.user=localStorage.getItem("username");
+    this.name_emp=localStorage.getItem("name_emp");
+    this.date=localStorage.getItem("date");
+    this.address_emp=localStorage.getItem("address_emp");
     this.loadObservationSection(this.id_observation);
   }
 
