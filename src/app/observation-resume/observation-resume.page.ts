@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController, ActionSheetController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ActionSheetController, ToastController, LoadingController } from '@ionic/angular';
 import { ServiceService } from '../services/service.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -31,8 +31,8 @@ export class ObservationResumePage implements OnInit{
     private actionSheetCtrl: ActionSheetController,
     private alert: AlertController,
     private service: ServiceService,
-    private toast: ToastController
-    ) {
+    private toast: ToastController,
+    private loadingController: LoadingController) {
     }
 
 
@@ -155,7 +155,7 @@ export class ObservationResumePage implements OnInit{
 
   public async takePhoto(){
     const image = await Camera.getPhoto({
-      quality: 70,
+      quality: 60,
       allowEditing: false,
       resultType: CameraResultType.Base64,
     });
@@ -163,23 +163,32 @@ export class ObservationResumePage implements OnInit{
     this.ngOnInit();
   }
 
-  saveImage(image: any){
-     const id_inspection=localStorage.getItem("id_inspection");
-     const id_observation=localStorage.getItem("id_observation");
-     const datosInspectionImage={
-       "id_inspection":id_inspection,
-       "id_observation": id_observation,
-       "url_image": image
-     };
+  async saveImage(image: any) {
+    // Mostrar el spinner de carga
+    const loading = await this.loadingController.create({
+      message: 'Saving image...',
+    });
+    await loading.present();
+
+    const id_inspection = localStorage.getItem("id_inspection");
+    const id_observation = localStorage.getItem("id_observation");
+    const datosInspectionImage = {
+      "id_inspection": id_inspection,
+      "id_observation": id_observation,
+      "url_image": image
+    };
+
     this.service.saveImage(datosInspectionImage).subscribe(
       (respuesta) => {
+        loading.dismiss();
         this.success();
         this.getPhotos();
-        this.isRefrescar=true;
+        this.isRefrescar = true;
         this.ngOnInit();
       },
       (error) => {
-        console.log("Error"+ error);
+        loading.dismiss();
+        console.log("Error" + error);
       }
     );
   }
