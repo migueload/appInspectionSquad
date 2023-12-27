@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ActionSheetController,AlertController, ToastController } from '@ionic/angular';
+import { NavController, ActionSheetController,AlertController, ToastController, LoadingController } from '@ionic/angular';
 import { ServiceService } from '../services/service.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -27,7 +27,8 @@ export class DetailsPage  implements OnInit{
     private activatedRoute: ActivatedRoute,
     private actionSheetCtrl: ActionSheetController,
     private alert: AlertController,
-    private toast: ToastController
+    private toast: ToastController,
+    private loadingController: LoadingController
   ) { }
 
 
@@ -122,17 +123,24 @@ export class DetailsPage  implements OnInit{
   }
 
 
-  showPhotos(id: any){
+  async showPhotos(id: any){
+    const loading = await this.loadingController.create({
+      message: 'loading photos...',
+    });
+    await loading.present();
+
     const datos={
       "id_observation": id
     }
     this.service.getPhotos(datos).subscribe(
       (respuesta) => {
+        loading.dismiss();
         this.photos=respuesta;
-        console.log(this.photos);
       },
       (error) => {
+        loading.dismiss();
         console.log("Error"+ error);
+
       }
     );
 

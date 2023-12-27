@@ -27,8 +27,9 @@
     </ion-segment-button>
   </ion-segment>
   <br>
-  <ion-item style="width: 300px;">
-    <ion-input type="date" id="date" label="Select Date" (ionChange)="onDateChange($event)"></ion-input>
+  <ion-item style="width: 400px;">
+    <ion-icon name="filter-circle-outline"></ion-icon>
+    <ion-input type="date" id="date" label="Select Date" (ionInput)="filterByDate($event)"></ion-input>
   </ion-item>
   <ion-grid>
     <ion-row *ngFor="let dato of datos;">

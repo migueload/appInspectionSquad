@@ -28,7 +28,6 @@ export class ListPage implements OnInit {
 
   ngOnInit() {
     this.load(0);
-    this.filterByDate();
   }
 
   load(status: any){
@@ -89,21 +88,21 @@ export class ListPage implements OnInit {
   }
 
 
-  filterByDate() {
-    if (this.selectedDate) {
-      const selectedDateFormatted = new Date(this.selectedDate).toLocaleDateString;
-      this.filteredDatos = this.datos.filter((dato) => dato.date === selectedDateFormatted);
-      this.vacio = this.filteredDatos.length === 0;
+
+
+  filterByDate(ev: any) {
+    const val = ev.target.value;
+    if (val && val.trim() !== '') {
+      this.datos = this.datos.filter((item) => {
+        const itemDate = new Date(item.date);
+        const filterDate = new Date(val);
+        return itemDate.toISOString().slice(0, 10) === filterDate.toISOString().slice(0, 10);
+      });
     } else {
-      this.filteredDatos = this.datos;
-      this.vacio = false;
+      this.ngOnInit();
     }
   }
 
-  onDateChange(event: any) {
-    this.selectedDate = event.detail.value;
-    this.filterByDate();
-  }
 
 
   closeSesion(){

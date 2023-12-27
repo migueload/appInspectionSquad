@@ -6,11 +6,10 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
 
   <br>
-  <ion-item>
+  <ion-item >
     <ion-label class="titulo">DETAILS OBSERVATIONS IN INSPECTION </ion-label>
   </ion-item>
 
@@ -24,8 +23,8 @@
       <ion-button  fill="solid" size="small" shape="round" (click)="showConfirmationPending()" *ngIf="!swPending">UPDATE PENDING</ion-button>
     </div>
     </ion-card>
-  <ion-card>
-    <ion-card-content *ngFor="let dato of datos;">
+  <ion-card *ngFor="let dato of datos;">
+    <ion-card-content>
       <ion-item>
         <ion-label><b>Section Observation </b> {{dato.seccion_observation}}</ion-label>
       </ion-item>
@@ -63,7 +62,6 @@
 
     </ion-card-content>
   </ion-card>
-
 
 </ion-content>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, ActionSheetController, ToastController, LoadingController } from '@ionic/angular';
 import { ServiceService } from '../services/service.service';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera, CameraResultType } from '@capacitor/camera';
 
 @Component({
   selector: 'app-observation-resume',
@@ -186,6 +186,7 @@ export class ObservationResumePage implements OnInit{
         this.isRefrescar = true;
         this.ngOnInit();
       },
+
       (error) => {
         loading.dismiss();
         console.log("Error" + error);
