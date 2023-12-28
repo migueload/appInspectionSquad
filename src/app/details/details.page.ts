@@ -22,6 +22,7 @@ export class DetailsPage  implements OnInit{
   swCompleted:any;
   name_emp:any;
   photos:any;
+  id_inspection:any;
   isAlertOpen = false;
   alertButtons = ['Action'];
 
@@ -67,9 +68,9 @@ export class DetailsPage  implements OnInit{
         this.type=respuesta[0].type_inspection;
         this.description_inspection=respuesta[0].description_inspection;
         this.inspect_by=respuesta[0].nombre_inspector;
+        this.id_inspection=respuesta[0].id_inspection;
         this.datos=respuesta;
         this.name_emp=localStorage.getItem('name_emp');
-        console.log(this.datos);
         respuesta[0].status=="0"?this.swPending=true:this.swPending=false;
         respuesta[0].status=="1"?this.swCompleted=true:this.swCompleted=false;
       },
@@ -93,7 +94,7 @@ export class DetailsPage  implements OnInit{
   }
 
   addObservation(){
-
+    localStorage.setItem("id_inspection", this.id_inspection);
   }
 
   async showConfirmationPending() {

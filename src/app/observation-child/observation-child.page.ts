@@ -12,12 +12,13 @@ export class ObservationChildPage implements OnInit {
 
   id_observation: any;
   observations:any;
+  comments:any="";
   user=localStorage.getItem("username");
   name_emp=localStorage.getItem("name_emp");
   date=localStorage.getItem("date");
   address_emp=localStorage.getItem("address_emp");
-  comments:any;
   id_inspection=localStorage.getItem("id_inspection");
+
 
   constructor(
     private service: ServiceService,
@@ -79,7 +80,6 @@ export class ObservationChildPage implements OnInit {
           }
         );
       }
-      localStorage.setItem("comments",this.comments);
       this.navCtrl.navigateForward('observation-resume');
   }
 
@@ -92,8 +92,9 @@ export class ObservationChildPage implements OnInit {
        "observation_section": datosObservationes[1],
        "observation": datosObservationes[2],
        "observation_child": datosObservationes[3],
-       "comments":localStorage.getItem('comments')
+       "comments":this.comments
      };
+    localStorage.setItem("comments", this.comments);
     this.service.saveInspectionDetails(datosInspectionDetails).subscribe(
       (respuesta) => {
         localStorage.setItem("id_observation",respuesta);

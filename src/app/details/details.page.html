@@ -18,21 +18,28 @@
       <ion-label style="font-size: 14px;"><b>Inspected by: </b>{{inspect_by}}</ion-label><br>
       <ion-card-title>{{type}} - {{description_inspection}}</ion-card-title><br>
     </ion-card-header>
-    <div style="text-align: right;padding-right: 20px;margin-bottom: 10px;">
-      <ion-button  fill="solid" size="small" shape="round" [routerLink]="['/observation-section',type]" ><ion-icon name="add-outline"></ion-icon>&nbsp;ADD</ion-button>
-      <ion-button  fill="solid" size="small" shape="round" (click)="sendReport(true)"  *ngIf="swCompleted"><ion-icon name="send-outline"></ion-icon>&nbsp;SEND REPORT</ion-button>
-      <ion-alert
-        [isOpen]="isAlertOpen"
-        header="Send Report"
-        subHeader="{{name_emp}}"
-        message="The report has been sent successfully."
-        [buttons]="alertButtons"
-        (didDismiss)="sendReport(false)"
-      ></ion-alert>
-      <ion-button  fill="clear" size="small" shape="round" style="background-color: #b11c44;color: #fff;" (click)="showConfirmationCancel()" *ngIf="swPending">CANCEL</ion-button>
-      <ion-button  fill="solid" size="small" shape="round" (click)="showConfirmationPending()" *ngIf="!swPending">UPDATE PENDING</ion-button>
-    </div>
+    <ion-grid>
+      <ion-col><ion-button  fill="solid" size="small" shape="round" (click)="addObservation()" [routerLink]="['/observation-section',type]" ><ion-icon name="add-outline"></ion-icon>&nbsp;ADD</ion-button></ion-col>
+
+      <ion-col>
+        <ion-button  fill="solid" size="small" shape="round" (click)="sendReport(true)"  *ngIf="swCompleted"><ion-icon name="send-outline"></ion-icon>&nbsp;SEND REPORT</ion-button>
+        <ion-alert
+          [isOpen]="isAlertOpen"
+          header="Send Report"
+          subHeader="{{name_emp}}"
+          message="The report has been sent successfully."
+          [buttons]="alertButtons"
+          (didDismiss)="sendReport(false)"
+        ></ion-alert>
+      </ion-col>
+
+      <ion-col>
+        <ion-button  fill="clear" size="small" shape="round" style="background-color: #b11c44;color: #fff;" (click)="showConfirmationCancel()" *ngIf="swPending">CANCEL</ion-button>
+        <ion-button  fill="solid" size="small" shape="round" (click)="showConfirmationPending()" *ngIf="!swPending">UPDATE PENDING</ion-button>
+      </ion-col>
+     </ion-grid>
     </ion-card>
+
   <ion-card *ngFor="let dato of datos;">
     <ion-card-content>
       <ion-item>

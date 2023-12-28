@@ -19,7 +19,6 @@ export class ListPage implements OnInit {
   selectedDate: string;
   filteredDatos: any[];
 
-
   constructor(
     private navCtrl: NavController,
     private actionSheetCtrl: ActionSheetController,
@@ -61,6 +60,7 @@ export class ListPage implements OnInit {
     this.service.getInspectionsByStatus(datosInspectionStatus).subscribe(
       (respuesta) => {
         this.datos=respuesta;
+        console.log(this.datos);
         respuesta[0]==undefined?this.vacio=true:this.vacio=false;
         this.status=this.getStatus(status);
       },

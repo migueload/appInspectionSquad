@@ -171,8 +171,6 @@ export class ServiceService {
     return this.http.post<any>(this.urlApi+"Inspections/getDetailsInspection", datos, httpOptions);
   }
 
-
-
   setUpdateStatus(datos: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -208,7 +206,6 @@ export class ServiceService {
     };
     return this.http.post<any>(this.urlApi+"Inspections/delImage", datos, httpOptions);
   }
-
 
 
   //**Generate Report */

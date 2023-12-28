@@ -12,15 +12,15 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 
 export class ObservationResumePage implements OnInit{
 
-  user=localStorage.getItem("username");
-  name_emp=localStorage.getItem("name_emp");
-  date=localStorage.getItem("date");
-  address_emp=localStorage.getItem("address_emp");
-  observation_section=localStorage.getItem("observation_section");
-  observation=localStorage.getItem("observation");
-  observation_child=localStorage.getItem("observation_child");
-  comments=localStorage.getItem("comments");
-  type_inspection=localStorage.getItem('type_inspection');
+  user:any;
+  name_emp:any;
+  date:any;
+  address_emp:any;
+  observation_section:any;
+  observation:any;
+  observation_child:any;
+  comments:any;
+  type_inspection:any;
   photos:any;
   isAlertOpen = false;
   alertButtons = ['Action'];
@@ -36,9 +36,23 @@ export class ObservationResumePage implements OnInit{
     }
 
 
-  ngOnInit(){
+  async ngOnInit(){
+    this.initialItems();
     this.getPhotos();
     this.refreshPage();
+  }
+
+  initialItems(){
+    console.log("ok");
+    this.user=localStorage.getItem("username");
+    this.name_emp=localStorage.getItem("name_emp");
+    this.date=localStorage.getItem("date");
+    this.address_emp=localStorage.getItem("address_emp");
+    this.observation_section=localStorage.getItem("observation_section");
+    this.observation=localStorage.getItem("observation");
+    this.observation_child=localStorage.getItem("observation_child");
+    this.comments=localStorage.getItem("comments");
+    this.type_inspection=localStorage.getItem('type_inspection');
   }
 
   closeSesion(){
@@ -134,7 +148,7 @@ export class ObservationResumePage implements OnInit{
         console.log("Error"+ error);
       }
     );
-}
+  }
 
 
   generateReport(isOpen: boolean){
@@ -147,10 +161,7 @@ export class ObservationResumePage implements OnInit{
         console.log("Error"+ error);
       }
     );
-
   }
-
-
 
 
   public async takePhoto(){
@@ -183,8 +194,6 @@ export class ObservationResumePage implements OnInit{
         loading.dismiss();
         this.success();
         this.getPhotos();
-        this.isRefrescar = true;
-        this.ngOnInit();
       },
 
       (error) => {
@@ -202,6 +211,9 @@ export class ObservationResumePage implements OnInit{
     });
     toast.present();
   }
+
+
+
 }
 
 
